@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/go-ego/gse"
+	gse "../../src"
 )
 
 var (
