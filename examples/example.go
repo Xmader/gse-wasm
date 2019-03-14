@@ -6,6 +6,8 @@ import (
 	"log"
 
 	gse "github.com/go-ego/gse/src"
+	// "github.com/go-ego/gse/src/dict"
+	// "github.com/go-ego/gse/testdata"
 )
 
 var (
@@ -62,10 +64,10 @@ func main() {
 
 	// 加载默认词典
 	seg.LoadDict()
-	// seg.LoadDict("../data/dict/dictionary.txt")
+	// seg.LoadDict(dict.Dictionary)
 
 	// 使用自定义字典
-	// seg.LoadDict("zh,../../testdata/test_dict.txt,../../testdata/test_dict1.txt")
+	// seg.LoadDict("zh", testdata.TestDict0, testdata.TestDict1)
 
 	seg.AddToken("《复仇者联盟3：无限战争》", 100, "n")
 	seg.AddToken("上海中心大厦", 100)

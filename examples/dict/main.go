@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	gse "github.com/go-ego/gse/src"
-	"github.com/go-ego/gse/src/testdata"
+	"github.com/go-ego/gse/testdata"
 )
 
 func main() {

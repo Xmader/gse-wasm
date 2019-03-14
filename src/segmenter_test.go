@@ -5,7 +5,7 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/go-ego/gse/src/testdata"
+	"github.com/go-ego/gse/testdata"
 	"github.com/vcaesar/tt"
 )
 
