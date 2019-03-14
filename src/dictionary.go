@@ -15,7 +15,7 @@
 
 package gse
 
-import "github.com/go-ego/gse/src/cedar"
+import "github.com/Xmader/gse-wasm/src/cedar"
 
 // Dictionary 结构体实现了一个字串前缀树，
 // 一个分词可能出现在叶子节点也有可能出现在非叶节点

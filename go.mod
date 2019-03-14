@@ -1,4 +1,4 @@
-module github.com/go-ego/gse
+module github.com/Xmader/gse-wasm
 
 require (
 	github.com/go-ego/cedar v0.0.0-20190212113122-dfcef7f31b50

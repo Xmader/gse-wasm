@@ -23,7 +23,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/go-ego/gse/src/dict"
+	"github.com/Xmader/gse-wasm/src/dict"
 )
 
 var (

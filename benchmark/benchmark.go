@@ -34,7 +34,7 @@ import (
 	"runtime/pprof"
 	"time"
 
-	gse "github.com/go-ego/gse/src"
+	gse "github.com/Xmader/gse-wasm/src"
 )
 
 var (

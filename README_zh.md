@@ -1,4 +1,4 @@
-# [gse](https://github.com/go-ego/gse)
+# [gse](https://github.com/Xmader/gse-wasm)
 
 Go 语言高效分词, 支持英文、中文、日文等
 
@@ -7,27 +7,27 @@ Go 语言高效分词, 支持英文、中文、日文等
 [![CircleCI Status](https://circleci.com/gh/go-ego/gse.svg?style=shield)](https://circleci.com/gh/go-ego/gse)
 [![codecov](https://codecov.io/gh/go-ego/gse/branch/master/graph/badge.svg)](https://codecov.io/gh/go-ego/gse)
 [![Build Status](https://travis-ci.org/go-ego/gse.svg)](https://travis-ci.org/go-ego/gse)
-[![Go Report Card](https://goreportcard.com/badge/github.com/go-ego/gse)](https://goreportcard.com/report/github.com/go-ego/gse)
-[![GoDoc](https://godoc.org/github.com/go-ego/gse?status.svg)](https://godoc.org/github.com/go-ego/gse)
-[![GitHub release](https://img.shields.io/github/release/go-ego/gse.svg)](https://github.com/go-ego/gse/releases/latest)
+[![Go Report Card](https://goreportcard.com/badge/github.com/Xmader/gse-wasm)](https://goreportcard.com/report/github.com/Xmader/gse-wasm)
+[![GoDoc](https://godoc.org/github.com/Xmader/gse-wasm?status.svg)](https://godoc.org/github.com/Xmader/gse-wasm)
+[![GitHub release](https://img.shields.io/github/release/go-ego/gse.svg)](https://github.com/Xmader/gse-wasm/releases/latest)
 [![Join the chat at https://gitter.im/go-ego/ego](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/go-ego/ego?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 <!--<a href="https://github.com/go-ego/ego/releases"><img src="https://img.shields.io/badge/%20version%20-%206.0.0%20-blue.svg?style=flat-square" alt="Releases"></a>-->
 
-<a href="https://github.com/go-ego/gse/blob/master/dictionary.go">词典</a>用双数组 trie（Double-Array Trie）实现，
-<a href="https://github.com/go-ego/gse/blob/master/segmenter.go">分词器</a>算法为基于词频的最短路径加动态规划, 以及 DAG 和 HMM 算法分词.
+<a href="https://github.com/Xmader/gse-wasm/blob/master/dictionary.go">词典</a>用双数组 trie（Double-Array Trie）实现，
+<a href="https://github.com/Xmader/gse-wasm/blob/master/segmenter.go">分词器</a>算法为基于词频的最短路径加动态规划, 以及 DAG 和 HMM 算法分词.
 
 支持 HMM 分词, 使用 viterbi 算法.
 
-支持普通、搜索引擎、全模式、精确模式和 HMM 模式多种分词模式，支持用户词典、词性标注，可运行<a href="https://github.com/go-ego/gse/blob/master/server/server.go"> JSON RPC 服务</a>。
+支持普通、搜索引擎、全模式、精确模式和 HMM 模式多种分词模式，支持用户词典、词性标注，可运行<a href="https://github.com/Xmader/gse-wasm/blob/master/server/server.go"> JSON RPC 服务</a>。
 
-分词速度<a href="https://github.com/go-ego/gse/blob/master/benchmark/benchmark.go">单线程</a> 9.2MB/s，<a href="https://github.com/go-ego/gse/blob/master/benchmark/goroutines/goroutines.go">goroutines 并发</a> 26.8MB/s. HMM 模式单线程分词速度 3.2MB/s.（ 双核4线程 Macbook Pro）。
+分词速度<a href="https://github.com/Xmader/gse-wasm/blob/master/benchmark/benchmark.go">单线程</a> 9.2MB/s，<a href="https://github.com/Xmader/gse-wasm/blob/master/benchmark/goroutines/goroutines.go">goroutines 并发</a> 26.8MB/s. HMM 模式单线程分词速度 3.2MB/s.（ 双核4线程 Macbook Pro）。
 
 QQ 群: 120563750
 
 ## 安装/更新
 
 ```
-go get -u github.com/go-ego/gse
+go get -u github.com/Xmader/gse-wasm
 ```
 
 ## [Build-tools](https://github.com/go-ego/re)
@@ -57,7 +57,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/go-ego/gse"
+	"github.com/Xmader/gse-wasm"
 )
 
 var seg gse.Segmenter
@@ -98,7 +98,7 @@ func main() {
 	// 加载默认字典
 	seg.LoadDict()
 	// 载入词典
-	// seg.LoadDict("your gopath"+"/src/github.com/go-ego/gse/data/dict/dictionary.txt")
+	// seg.LoadDict("your gopath"+"/src/github.com/Xmader/gse-wasm/data/dict/dictionary.txt")
 
 	cut()
 
@@ -115,7 +115,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/go-ego/gse"
+	"github.com/Xmader/gse-wasm"
 )
 
 func main() {
@@ -137,7 +137,7 @@ func main() {
 ## Authors
 * [The author is vz](https://github.com/vcaesar)
 * [Maintainers](https://github.com/orgs/go-ego/people)
-* [Contributors](https://github.com/go-ego/gse/graphs/contributors)
+* [Contributors](https://github.com/Xmader/gse-wasm/graphs/contributors)
 
 ## License
 

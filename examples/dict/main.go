@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	gse "github.com/go-ego/gse/src"
-	"github.com/go-ego/gse/testdata"
+	gse "github.com/Xmader/gse-wasm/src"
+	"github.com/Xmader/gse-wasm/testdata"
 )
 
 func main() {
