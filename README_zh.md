@@ -14,8 +14,6 @@ Go 语言高效分词, 支持英文、中文、日文等
 
 分词速度<a href="https://github.com/Xmader/gse-wasm/blob/master/benchmark/benchmark.go">单线程</a> 9.2MB/s，<a href="https://github.com/Xmader/gse-wasm/blob/master/benchmark/goroutines/goroutines.go">goroutines 并发</a> 26.8MB/s. HMM 模式单线程分词速度 3.2MB/s.（ 双核4线程 Macbook Pro）。
 
-QQ 群: 120563750
-
 ## 安装/更新
 
 ```
