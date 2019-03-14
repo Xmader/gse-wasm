@@ -10,7 +10,7 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/go-ego/gse"
+	gse "github.com/go-ego/gse/src"
 )
 
 var (
@@ -56,7 +56,7 @@ func main() {
 	runtime.GOMAXPROCS(numThreads)
 
 	// 载入词典
-	segmenter.LoadDict("../../data/dict/dictionary.txt")
+	segmenter.LoadDict()
 	size, lines := openBook()
 
 	// 启动工作线程

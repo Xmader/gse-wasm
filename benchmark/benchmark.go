@@ -34,7 +34,7 @@ import (
 	"runtime/pprof"
 	"time"
 
-	"github.com/go-ego/gse"
+	gse "github.com/go-ego/gse/src"
 )
 
 var (
@@ -120,7 +120,7 @@ func main() {
 	t0 := time.Now()
 
 	var segmenter gse.Segmenter
-	segmenter.LoadDict("../data/dict/dictionary.txt")
+	segmenter.LoadDict()
 
 	// 记录时间
 	t1 := time.Now()
