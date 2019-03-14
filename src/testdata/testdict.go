@@ -41,8 +41,7 @@ const TestDict0 string = `纽约 1758 ns
 爱 14878 v
 `
 
-const TestDict1 string = `
-世 64 p1 
+const TestDict1 string = `世 64 p1 
 界 64 p2
 有 64 p3 
 七 64
@@ -51,8 +50,7 @@ const TestDict1 string = `
 口 64 p7
 `
 
-const TestDict2 string = `
-世界 32 
+const TestDict2 string = `世界 32 
 国有 8 p9
 七十 16 p10
 七十亿 4

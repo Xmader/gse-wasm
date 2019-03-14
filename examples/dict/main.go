@@ -3,12 +3,13 @@ package main
 import (
 	"fmt"
 
-	"github.com/go-ego/gse"
+	gse "github.com/go-ego/gse/src"
+	"github.com/go-ego/gse/src/testdata"
 )
 
 func main() {
 	var seg gse.Segmenter
-	seg.LoadDict("zh,../../testdata/test_dict.txt,../../testdata/test_dict1.txt")
+	seg.LoadDict("zh", testdata.TestDict0, testdata.TestDict1)
 
 	text1 := []byte("旧金山湾金门大桥")
 	fmt.Println(seg.String(text1, true))

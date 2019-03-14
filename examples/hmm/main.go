@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/go-ego/gse"
+	gse "github.com/go-ego/gse/src"
 )
 
 var (
