@@ -2,17 +2,8 @@
 
 Go efficient text segmentation; support english, chinese, japanese and other.
 
-<!--<img align="right" src="https://raw.githubusercontent.com/go-ego/ego/master/logo.jpg">-->
-<!--<a href="https://circleci.com/gh/go-ego/ego/tree/dev"><img src="https://img.shields.io/circleci/project/go-ego/ego/dev.svg" alt="Build Status"></a>-->
-[![CircleCI Status](https://circleci.com/gh/go-ego/gse.svg?style=shield)](https://circleci.com/gh/go-ego/gse)
-[![codecov](https://codecov.io/gh/go-ego/gse/branch/master/graph/badge.svg)](https://codecov.io/gh/go-ego/gse)
-[![Build Status](https://travis-ci.org/go-ego/gse.svg)](https://travis-ci.org/go-ego/gse)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Xmader/gse-wasm)](https://goreportcard.com/report/github.com/Xmader/gse-wasm)
-[![GoDoc](https://godoc.org/github.com/Xmader/gse-wasm?status.svg)](https://godoc.org/github.com/Xmader/gse-wasm)
-[![GitHub release](https://img.shields.io/github/release/go-ego/gse.svg)](https://github.com/Xmader/gse-wasm/releases/latest)
-[![Join the chat at https://gitter.im/go-ego/ego](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/go-ego/ego?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-<!-- [![Release](https://github-release-version.herokuapp.com/github/go-ego/gse/release.svg?style=flat)](https://github.com/Xmader/gse-wasm/releases/latest) -->
-<!--<a href="https://github.com/go-ego/ego/releases"><img src="https://img.shields.io/badge/%20version%20-%206.0.0%20-blue.svg?style=flat-square" alt="Releases"></a>-->
+[![GoDoc](https://godoc.org/github.com/Xmader/gse-wasm/src?status.svg)](https://godoc.org/github.com/Xmader/gse-wasm/src)
 
 [简体中文](https://github.com/Xmader/gse-wasm/blob/master/README_zh.md)
 
@@ -31,25 +22,6 @@ Text Segmentation speed<a href="https://github.com/Xmader/gse-wasm/blob/master/b
 go get -u github.com/Xmader/gse-wasm
 ```
 
-## [Build-tools](https://github.com/go-ego/re)
-```
-go get -u github.com/go-ego/re
-```
-
-### re gse
-To create a new gse application
-
-```
-$ re gse my-gse
-```
-
-### re run
-
-To run the application we just created, you can navigate to the application folder and execute:
-```
-$ cd my-gse && re run
-```
-
 ## Use
 
 ```go
@@ -58,7 +30,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/Xmader/gse-wasm"
+	gse "github.com/Xmader/gse-wasm/src"
 )
 
 var (
@@ -97,7 +69,7 @@ func main() {
 	// Loading the default dictionary
 	seg.LoadDict()
 	// Load the dictionary
-	// seg.LoadDict("your gopath"+"/src/github.com/Xmader/gse-wasm/data/dict/dictionary.txt")
+	// seg.LoadDict("迪拜 113 ns\n哈里法 3 n\n哈利法塔 3 nr")
 
 	cut()
 
@@ -114,12 +86,13 @@ package main
 import (
 	"fmt"
 
-	"github.com/Xmader/gse-wasm"
+	gse "github.com/Xmader/gse-wasm/src"
+	"github.com/Xmader/gse-wasm/testdata"
 )
 
 func main() {
 	var seg gse.Segmenter
-	seg.LoadDict("zh,testdata/test_dict.txt,testdata/test_dict1.txt")
+	seg.LoadDict("zh", testdata.TestDict0, testdata.TestDict1)
 
 	text1 := []byte("你好世界, Hello world")
 	fmt.Println(seg.String(text1, true))
