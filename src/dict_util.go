@@ -79,6 +79,8 @@ func (seg *Segmenter) AddTokenForce(text string, frequency int, pos ...string) {
 func (seg *Segmenter) LoadDict(dictStrList ...string) error {
 	seg.dict = NewDict()
 
+	log.Println("Gse dictionary loading.")
+
 	if len(dictStrList) > 0 {
 		for i := 0; i < len(dictStrList); i++ {
 			dictStr := dictStrList[i]
@@ -133,10 +135,10 @@ func (seg *Segmenter) Read(dictStr string) error {
 			}
 
 			if size > 0 {
-				log.Printf("File line \"%v\" read error: %v, skip",
+				log.Printf("Line \"%v\" read error: %v, skip",
 					line, fsErr.Error())
 			} else {
-				log.Printf("File line \"%v\" is empty, read error: %v, skip",
+				log.Printf("Line \"%v\" is empty, read error: %v, skip",
 					line, fsErr.Error())
 			}
 		}

@@ -4,7 +4,8 @@ import (
 	"flag"
 	"fmt"
 
-	gse ".."
+	gse "github.com/go-ego/gse/src"
+	"github.com/go-ego/gse/src/dict"
 )
 
 var (
@@ -15,7 +16,7 @@ func main() {
 	flag.Parse()
 
 	var seg gse.Segmenter
-	seg.LoadDict("./data/dict/dictionary.txt")
+	seg.LoadDict(dict.Dictionary)
 
 	segments := seg.Segment([]byte(*text))
 	fmt.Println(gse.ToString(segments, true))

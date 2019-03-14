@@ -5,6 +5,7 @@ import (
 	"runtime"
 	"testing"
 
+	"github.com/go-ego/gse/src/testdata"
 	"github.com/vcaesar/tt"
 )
 
@@ -58,8 +59,7 @@ func TestSplit(t *testing.T) {
 
 func TestSegment(t *testing.T) {
 	var seg Segmenter
-	seg.LoadDict("testdata/test_dict1.txt,testdata/test_dict2.txt")
-	// seg.LoadDict("testdata/test_dict1.txt", "testdata/test_dict2.txt")
+	seg.LoadDict(testdata.TestDict1, testdata.TestDict2)
 	tt.Expect(t, "16", seg.dict.NumTokens())
 	// tt.Expect(t, "5", seg.dict.NumTokens())
 	segments := seg.Segment([]byte("世界有七十亿人口"))
@@ -80,7 +80,7 @@ func TestSegment(t *testing.T) {
 
 func TestSegmentS(t *testing.T) {
 	var seg Segmenter
-	seg.LoadDict("zh", "testdata/test_dict.txt")
+	seg.LoadDict("zh", testdata.TestDict0)
 	// seg.LoadDict()
 
 	dict := seg.Dictionary()
@@ -141,8 +141,7 @@ func TestSegmentJp(t *testing.T) {
 
 func TestSegmentDicts(t *testing.T) {
 	var seg Segmenter
-	// seg.LoadDict("zh,jp")
-	seg.LoadDict("./data/dict/dictionary.txt,./data/dict/jp/dict.txt")
+	seg.LoadDict("zh", "jp")
 
 	text1 := []byte("旧金山湾金门大桥")
 	segments := seg.Segment(text1)
@@ -182,7 +181,7 @@ func TestSegmentDicts(t *testing.T) {
 }
 
 func TestLargeDictionary(t *testing.T) {
-	err := prodSeg.LoadDict("zh,testdata/test_dict2.txt")
+	err := prodSeg.LoadDict("zh", testdata.TestDict2)
 	tt.Nil(t, err)
 
 	text1 := []byte("世界人口")
