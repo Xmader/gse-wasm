@@ -186,7 +186,7 @@ func (seg *Segmenter) Read(dictStr string) error {
 func LoadBuiltinDict(dictStr string) string {
 
 	if dictStr == "zh" {
-		return dict.ZH
+		return dict.Dictionary
 	} else if dictStr == "jp" {
 		return dict.JP
 	}
