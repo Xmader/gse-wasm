@@ -5,7 +5,7 @@
 type AddTokenFunction = (text: string, frequency: number, po?: string) => null;
 type CutFunction = (str: string, hmm?: boolean) => string[]
 
-interface Segmenter {
+export interface Segmenter {
     LoadDict: (...dictStrList: string[]) => null;
     AddToken: AddTokenFunction;
     AddTokenForce: AddTokenFunction;
@@ -18,7 +18,7 @@ interface Segmenter {
     HMMCut: (str: string) => string[];
 }
 
-interface Gse {
+export interface Gse {
     Segmenter: Segmenter;
 }
 
