@@ -1,7 +1,5 @@
 // @ts-check
 
-const WebAssembly = top["WebAssembly"]
-
 if (!WebAssembly.instantiateStreaming) { // polyfill
 	WebAssembly.instantiateStreaming = async (resp, importObject) => {
 		const source = await (await resp).arrayBuffer();
@@ -421,7 +419,7 @@ const goRuntime = (() => {
 })();
 
 
-/** @type {import("./types").InitFunction} */
+/** @type {import("..").InitFunction} */
 const Init = async (wasmFile = "gse.wasm") => {
 
 	const go = new goRuntime.Go();
@@ -450,6 +448,7 @@ const Init = async (wasmFile = "gse.wasm") => {
 		returnModule[key] = goRuntime[key]
 	})
 
+	// @ts-ignore
 	return returnModule
 
 }
