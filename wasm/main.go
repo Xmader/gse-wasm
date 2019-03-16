@@ -6,7 +6,8 @@ import (
 
 type goFunc func(js.Value, []js.Value) interface{}
 
-func main() {
+// Segmenter - gse.Segmenter 的 js 绑定
+func Segmenter() js.Value {
 
 	goFunctions := map[string]goFunc{
 		"LoadDict":      LoadDict,
@@ -27,7 +28,21 @@ func main() {
 		jsFunctions.Set(name, js.FuncOf(gofunction))
 	}
 
-	js.Global().Set("__ges_seg", jsFunctions)
+	return jsFunctions
+}
+
+// Gse - gse 的 js 绑定
+func Gse() js.Value {
+	var gse = js.ValueOf(make(map[string]interface{}))
+	gse.Set("Segmenter", Segmenter())
+
+	return gse
+}
+
+func main() {
+
+	js.Global().Set("__gse", Gse())
 
 	select {}
+
 }
