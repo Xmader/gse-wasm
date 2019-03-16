@@ -16,7 +16,6 @@ func main() {
 		"Cut":           Cut,
 		"CutSearch":     CutSearch,
 		"CutAll":        CutAll,
-		"Segment":       Segment,
 		"String":        String,
 		"Slice":         Slice,
 		"HMMCut":        HMMCut,

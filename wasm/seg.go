@@ -51,23 +51,17 @@ func CalcToken(this js.Value, args []js.Value) interface{} {
 
 func Cut(this js.Value, args []js.Value) interface{} {
 	str, hmm := resolveCutArgs(args)
-	return seg.Cut(str, hmm)
+	return stringArray(seg.Cut(str, hmm))
 }
 
 func CutSearch(this js.Value, args []js.Value) interface{} {
 	str, hmm := resolveCutArgs(args)
-	return seg.CutSearch(str, hmm)
+	return stringArray(seg.CutSearch(str, hmm))
 }
 
 func CutAll(this js.Value, args []js.Value) interface{} {
 	str := args[0].String()
-	return seg.CutAll(str)
-}
-
-func Segment(this js.Value, args []js.Value) interface{} {
-	str := args[0].String()
-	segments := seg.Segment([]byte(str))
-	return segments
+	return stringArray(seg.CutAll(str))
 }
 
 func String(this js.Value, args []js.Value) interface{} {
@@ -77,10 +71,10 @@ func String(this js.Value, args []js.Value) interface{} {
 
 func Slice(this js.Value, args []js.Value) interface{} {
 	bytes, searchMode := resolveSegmentArgs(args)
-	return seg.Slice(bytes, searchMode)
+	return stringArray(seg.Slice(bytes, searchMode))
 }
 
 func HMMCut(this js.Value, args []js.Value) interface{} {
 	str := args[0].String()
-	return seg.HMMCut(str)
+	return stringArray(seg.HMMCut(str))
 }

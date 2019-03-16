@@ -24,3 +24,14 @@ func resolveSegmentArgs(args []js.Value) ([]byte, bool) {
 
 	return bytes, searchMode
 }
+
+func stringArray(goStringArray []string) js.Value {
+	length := len(goStringArray)
+	jsStringArray := js.ValueOf(make([]interface{}, length))
+
+	for index, value := range goStringArray {
+		jsStringArray.SetIndex(index, value)
+	}
+
+	return jsStringArray
+}
