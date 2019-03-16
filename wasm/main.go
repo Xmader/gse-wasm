@@ -32,6 +32,7 @@ func Segmenter() js.Value {
 }
 
 // Gse - gse 的 js 绑定
+//export Gse
 func Gse() js.Value {
 	var gse = js.ValueOf(make(map[string]interface{}))
 	gse.Set("Segmenter", Segmenter())
@@ -41,7 +42,7 @@ func Gse() js.Value {
 
 func main() {
 
-	js.Global().Set("__gse", Gse())
+	js.Global().Set("gse", Gse())
 
 	select {}
 
