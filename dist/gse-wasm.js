@@ -421,6 +421,7 @@ const goRuntime = (() => {
 })();
 
 
+/** @type {import("./types").InitFunction} */
 const Init = async (wasmFile = "gse.wasm") => {
 
 	const go = new goRuntime.Go();
