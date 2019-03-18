@@ -1,12 +1,13 @@
 {
     "name": "gse-wasm",
     "version": "0.1.0",
-    "description": "Go and WebAssembly efficient text segmentation; support english, chinese, japanese and other.",
+    "description": "WebAssembly efficient text segmentation; support english, chinese, japanese and other.",
     "main": "dist/gse-wasm.js",
     "types": "types/index.d.ts",
     "files": [
         "dist",
-        "types"
+        "types",
+        "README_zh.md"
     ],
     "repository": {
         "type": "git",

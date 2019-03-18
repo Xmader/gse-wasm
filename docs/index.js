@@ -2,11 +2,14 @@
 
 (async () => {
 
+    const jp = /^\?jp$/.test(location.search)
+
     /** @type {HTMLButtonElement} */
     const runBtn = document.querySelector("#runButton")
     runBtn.disabled = true
 
-    const wasm = await Init("https://cdn.staticaly.com/gh/Xmader/gse-wasm/master/dist/gse.wasm")
+    const wasmURL = `https://cdn.staticaly.com/gh/Xmader/gse-wasm/master/dist/gse${jp ? "_full" : ""}.wasm`
+    const wasm = await Init(wasmURL)
 
     /** @type {import("..").Gse} */
     const gse = wasm.gse
@@ -24,7 +27,7 @@
 
     runBtn.onclick = run
 
-    seg.LoadDict("zh")
+    seg.LoadDict(jp ? "jp" : "zh")
 
     runBtn.disabled = false
 
