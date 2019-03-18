@@ -4,7 +4,7 @@ const Init = require("gse-wasm");
 
 (async () => {
 
-    const wasmURL = "https://cdn.jsdelivr.net/npm/gse-wasm/dist/gse.wasm"  // wasm 文件 URL
+    const wasmURL = "https://unpkg.com/gse-wasm/dist/gse.wasm"  // wasm 文件 URL
     const { gse } = await Init(wasmURL)
 
     const seg = gse.Segmenter
