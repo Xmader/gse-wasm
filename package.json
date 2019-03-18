@@ -9,6 +9,16 @@
         "types",
         "README_zh.md"
     ],
+    "keywords": [
+        "中文分词",
+        "分词",
+        "segment",
+        "segmentation",
+        "chinese segmentation",
+        "chinese",
+        "japanese",
+        "webassembly"
+    ],
     "repository": {
         "type": "git",
         "url": "git+https://github.com/Xmader/gse-wasm.git"
