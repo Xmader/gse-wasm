@@ -22,7 +22,7 @@ package gse
 import "github.com/Xmader/gse-wasm/src/hmm"
 
 const (
-	version = "v0.1.0"
+	version = "v0.1.1"
 
 	// minTokenFrequency = 2 // 仅从字典文件中读取大于等于此频率的分词
 )
