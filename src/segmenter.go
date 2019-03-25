@@ -80,7 +80,7 @@ func (seg *Segmenter) segmentWords(text []Text, searchMode bool) []Segment {
 		return nil
 	}
 
-	tokens := make([]*Token, seg.dict.maxTokenLen)
+	tokens := make([]*Token, seg.dict.MaxTokenLen)
 	for current := 0; current < len(text); current++ {
 		// 找到前一个字元处的最短路径，以便计算后续路径值
 		var baseDistance float32
@@ -92,28 +92,28 @@ func (seg *Segmenter) segmentWords(text []Text, searchMode bool) []Segment {
 		}
 
 		// 寻找所有以当前字元开头的分词
-		tx := text[current:minInt(current+seg.dict.maxTokenLen, len(text))]
+		tx := text[current:minInt(current+seg.dict.MaxTokenLen, len(text))]
 		numTokens := seg.dict.lookupTokens(tx, tokens)
 
 		// 对所有可能的分词，更新分词结束字元处的跳转信息
 		for iToken := 0; iToken < numTokens; iToken++ {
-			location := current + len(tokens[iToken].text) - 1
+			location := current + len(tokens[iToken].Texts) - 1
 			if !searchMode || current != 0 || location != len(text)-1 {
 				updateJumper(&jumpers[location], baseDistance, tokens[iToken])
 			}
 		}
 
 		// 当前字元没有对应分词时补加一个伪分词
-		if numTokens == 0 || len(tokens[0].text) > 1 {
+		if numTokens == 0 || len(tokens[0].Texts) > 1 {
 			updateJumper(&jumpers[current], baseDistance,
-				&Token{text: []Text{text[current]}, frequency: 1, distance: 32, pos: "x"})
+				&Token{Texts: []Text{text[current]}, Frequency: 1, Distance: 32, Pos: "x"})
 		}
 	}
 
 	// 从后向前扫描第一遍得到需要添加的分词数目
 	numSeg := 0
 	for index := len(text) - 1; index >= 0; {
-		location := index - len(jumpers[index].token.text) + 1
+		location := index - len(jumpers[index].token.Texts) + 1
 		numSeg++
 		index = location - 1
 	}
@@ -121,18 +121,18 @@ func (seg *Segmenter) segmentWords(text []Text, searchMode bool) []Segment {
 	// 从后向前扫描第二遍添加分词到最终结果
 	outputSegments := make([]Segment, numSeg)
 	for index := len(text) - 1; index >= 0; {
-		location := index - len(jumpers[index].token.text) + 1
+		location := index - len(jumpers[index].token.Texts) + 1
 		numSeg--
-		outputSegments[numSeg].token = jumpers[index].token
+		outputSegments[numSeg].Token = jumpers[index].token
 		index = location - 1
 	}
 
 	// 计算各个分词的字节位置
 	bytePosition := 0
 	for iSeg := 0; iSeg < len(outputSegments); iSeg++ {
-		outputSegments[iSeg].start = bytePosition
-		bytePosition += textSliceByteLen(outputSegments[iSeg].token.text)
-		outputSegments[iSeg].end = bytePosition
+		outputSegments[iSeg].Start = bytePosition
+		bytePosition += textSliceByteLen(outputSegments[iSeg].Token.Texts)
+		outputSegments[iSeg].End = bytePosition
 	}
 
 	return outputSegments
@@ -143,7 +143,7 @@ func (seg *Segmenter) segmentWords(text []Text, searchMode bool) []Segment {
 //	2. 当该位置的当前最短路径大于新的最短路径时
 // 将当前位置的最短路径值更新为 baseDistance 加上新分词的概率
 func updateJumper(jumper *jumper, baseDistance float32, token *Token) {
-	newDistance := baseDistance + token.distance
+	newDistance := baseDistance + token.Distance
 	if jumper.minDistance == 0 || jumper.minDistance > newDistance {
 		jumper.minDistance = newDistance
 		jumper.token = token

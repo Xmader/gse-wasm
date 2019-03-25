@@ -46,7 +46,7 @@ func (seg *Segmenter) AddToken(text string, frequency int, pos ...string) {
 	}
 
 	words := splitTextToWords([]byte(text))
-	token := Token{text: words, frequency: frequency, pos: po}
+	token := Token{Texts: words, Frequency: frequency, Pos: po}
 
 	seg.dict.addToken(token)
 }
@@ -175,7 +175,7 @@ func (seg *Segmenter) Read(dictStr string) error {
 
 		// 将分词添加到字典中
 		words := splitTextToWords([]byte(text))
-		token := Token{text: words, frequency: frequency, pos: pos}
+		token := Token{Texts: words, Frequency: frequency, Pos: pos}
 		seg.dict.addToken(token)
 	}
 
@@ -209,28 +209,28 @@ func IsJp(segText string) bool {
 // CalcToken calc the segmenter token
 func (seg *Segmenter) CalcToken() {
 	// 计算每个分词的路径值，路径值含义见 Token 结构体的注释
-	logTotalFrequency := float32(math.Log2(float64(seg.dict.totalFrequency)))
-	for i := range seg.dict.tokens {
-		token := &seg.dict.tokens[i]
-		token.distance = logTotalFrequency - float32(math.Log2(float64(token.frequency)))
+	logTotalFrequency := float32(math.Log2(float64(seg.dict.TotalFrequency)))
+	for i := range seg.dict.Tokens {
+		token := &seg.dict.Tokens[i]
+		token.Distance = logTotalFrequency - float32(math.Log2(float64(token.Frequency)))
 	}
 
 	// 对每个分词进行细致划分，用于搜索引擎模式，
 	// 该模式用法见 Token 结构体的注释。
-	for i := range seg.dict.tokens {
-		token := &seg.dict.tokens[i]
-		segments := seg.segmentWords(token.text, true)
+	for i := range seg.dict.Tokens {
+		token := &seg.dict.Tokens[i]
+		segments := seg.segmentWords(token.Texts, true)
 
 		// 计算需要添加的子分词数目
 		numTokensToAdd := 0
 		for iToken := 0; iToken < len(segments); iToken++ {
-			// if len(segments[iToken].token.text) > 1 {
+			// if len(segments[iToken].Token.Texts) > 1 {
 			// 略去字元长度为一的分词
 			// TODO: 这值得进一步推敲，特别是当字典中有英文复合词的时候
-			if len(segments[iToken].token.text) > 0 {
+			if len(segments[iToken].Token.Texts) > 0 {
 				hasJp := false
-				if len(segments[iToken].token.text) == 1 {
-					segText := string(segments[iToken].token.text[0])
+				if len(segments[iToken].Token.Texts) == 1 {
+					segText := string(segments[iToken].Token.Texts[0])
 					hasJp = IsJp(segText)
 				}
 
@@ -239,21 +239,21 @@ func (seg *Segmenter) CalcToken() {
 				}
 			}
 		}
-		token.segments = make([]*Segment, numTokensToAdd)
+		token.Segments = make([]*Segment, numTokensToAdd)
 
 		// 添加子分词
 		iSegmentsToAdd := 0
 		for iToken := 0; iToken < len(segments); iToken++ {
-			// if len(segments[iToken].token.text) > 1 {
-			if len(segments[iToken].token.text) > 0 {
+			// if len(segments[iToken].Token.Texts) > 1 {
+			if len(segments[iToken].Token.Texts) > 0 {
 				hasJp := false
-				if len(segments[iToken].token.text) == 1 {
-					segText := string(segments[iToken].token.text[0])
+				if len(segments[iToken].Token.Texts) == 1 {
+					segText := string(segments[iToken].Token.Texts[0])
 					hasJp = IsJp(segText)
 				}
 
 				if !hasJp {
-					token.segments[iSegmentsToAdd] = &segments[iToken]
+					token.Segments[iSegmentsToAdd] = &segments[iToken]
 					iSegmentsToAdd++
 				}
 			}
