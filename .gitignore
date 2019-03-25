@@ -1,6 +1,5 @@
 # Object files
 .DS_Store
-.vscode
 .idea
 
 examples/examples
