@@ -34,8 +34,8 @@
     },
     "scripts": {
         "build": "cd wasm/ && GOARCH=wasm GOOS=js go build -o ../dist/gse.wasm .",
-        "build:lite": "cd wasm/ && GOARCH=wasm GOOS=js go build --tags=lite -o ../dist/gse.wasm .",
-        "build:full": "cd wasm/ && GOARCH=wasm GOOS=js go build --tags=full -o ../dist/gse.wasm .",
+        "build:lite": "cd wasm/ && GOARCH=wasm GOOS=js go build --tags=lite -o ../dist/gse_lite.wasm .",
+        "build:full": "cd wasm/ && GOARCH=wasm GOOS=js go build --tags=full -o ../dist/gse_full.wasm .",
         "build:all": "npm run build && npm run build:lite && npm run build:full"
     }
 }
