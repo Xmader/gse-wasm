@@ -7,7 +7,7 @@ type CutFunction = (str: string, hmm?: boolean) => string[]
 
 export interface Segmenter {
     LoadDict: (...dictStrList: string[]) => null;
-    SetDict: (dictDataStr: string) => null;
+    SetDict: (dictData: Uint8Array) => null;
     AddToken: AddTokenFunction;
     AddTokenForce: AddTokenFunction;
     CalcToken: () => null;

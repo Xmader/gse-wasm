@@ -35,7 +35,6 @@ func SetDict(this js.Value, args []js.Value) interface{} {
 	dec := gob.NewDecoder(reader)
 	dec.Decode(dict)
 
-	var seg gse.Segmenter
 	seg.SetDictionary(dict)
 
 	return nil
