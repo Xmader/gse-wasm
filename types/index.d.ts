@@ -7,6 +7,7 @@ type CutFunction = (str: string, hmm?: boolean) => string[]
 
 export interface Segmenter {
     LoadDict: (...dictStrList: string[]) => null;
+    SetDict: (dictDataStr: string) => null;
     AddToken: AddTokenFunction;
     AddTokenForce: AddTokenFunction;
     CalcToken: () => null;
@@ -25,7 +26,7 @@ export interface Gse {
 /**
  * @param {string} wasmFile 使用的 wasm 文件的 URL
  */
-export type InitFunction = (wasmFile = "gse.wasm") => Promise<{ gse: Gse }>
+export type InitFunction = (wasmFile: string) => Promise<{ gse: Gse }>
 
 declare const Init: InitFunction
 export default Init

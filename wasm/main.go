@@ -11,6 +11,7 @@ func Segmenter() js.Value {
 
 	goFunctions := map[string]goFunc{
 		"LoadDict":      LoadDict,
+		"SetDict":       SetDict,
 		"AddToken":      AddToken,
 		"AddTokenForce": AddTokenForce,
 		"CalcToken":     CalcToken,

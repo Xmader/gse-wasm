@@ -38,6 +38,11 @@ func (seg *Segmenter) Dictionary() *Dictionary {
 	return seg.dict
 }
 
+// SetDictionary 设置分词器使用的词典
+func (seg *Segmenter) SetDictionary(dict *Dictionary) {
+	seg.dict = dict
+}
+
 // AddToken add new text to token
 func (seg *Segmenter) AddToken(text string, frequency int, pos ...string) {
 	var po string

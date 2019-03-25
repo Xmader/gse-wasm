@@ -1,6 +1,8 @@
 package main
 
 import (
+	"bytes"
+	"encoding/gob"
 	"syscall/js"
 
 	gse "github.com/Xmader/gse-wasm/src"
@@ -21,6 +23,22 @@ func LoadDict(this js.Value, args []js.Value) interface{} {
 
 	err := seg.LoadDict(dictStrList...)
 	return err
+}
+
+func SetDict(this js.Value, args []js.Value) interface{} {
+
+	b := []byte(args[0].String())
+	reader := bytes.NewReader(b)
+
+	dict := &gse.Dictionary{}
+
+	dec := gob.NewDecoder(reader)
+	dec.Decode(dict)
+
+	var seg gse.Segmenter
+	seg.SetDictionary(dict)
+
+	return nil
 }
 
 func AddToken(this js.Value, args []js.Value) interface{} {
