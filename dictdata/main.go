@@ -38,6 +38,6 @@ func ExportDictData(lang, outputDir string) {
 }
 
 func main() {
-	ExportDictData("zh", "../dist")
-	ExportDictData("jp", "../dist")
+	ExportDictData("zh", "../docs")
+	ExportDictData("jp", "../docs")
 }

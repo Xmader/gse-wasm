@@ -38,7 +38,7 @@
     if (savedData) {
         seg.SetDict(savedData, savedData.length)
     } else {
-        const dictDataURL = `https://raw.githubusercontent.com/Xmader/gse-wasm/master/dist/${dictDataFile}`
+        const dictDataURL = `https://www.xmader.com/gse-wasm/${dictDataFile}`
         const dictDataURLr = await fetch(dictDataURL)
         if (dictDataURLr.ok) {
             const dictData = new Uint8Array(await dictDataURLr.arrayBuffer())
