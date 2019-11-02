@@ -1,6 +1,6 @@
 {
     "name": "gse-wasm",
-    "version": "0.1.2",
+    "version": "0.2.0",
     "description": "WebAssembly efficient text segmentation; support english, chinese, japanese and other.",
     "main": "dist/gse-wasm.js",
     "types": "types/index.d.ts",
@@ -30,12 +30,14 @@
     "author": "Xmader",
     "license": "MIT AND Apache-2.0",
     "devDependencies": {
+        "@types/localforage": "0.0.34",
         "@types/webassembly-js-api": "github:Xmader/webassembly-js-api"
     },
     "scripts": {
+        "dictdata": "cd dictdata/ && go run --tags=full ./main.go",
         "build": "cd wasm/ && GOARCH=wasm GOOS=js go build -o ../dist/gse.wasm .",
         "build:lite": "cd wasm/ && GOARCH=wasm GOOS=js go build --tags=lite -o ../dist/gse_lite.wasm .",
         "build:full": "cd wasm/ && GOARCH=wasm GOOS=js go build --tags=full -o ../dist/gse_full.wasm .",
-        "build:all": "npm run build && npm run build:lite && npm run build:full"
+        "build:all": "npm run dictdata && npm run build && npm run build:lite && npm run build:full"
     }
 }

@@ -32,7 +32,7 @@ npm install gse-wasm
 
 ## 自行构建
 
-(需要安装 Go 1.12 或以上版本)
+(需要安装 Go 1.13 或以上版本)
 
 ```
 npm run build:all

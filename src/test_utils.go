@@ -7,7 +7,7 @@ import (
 
 func printTokens(tokens []*Token, numTokens int) (output string) {
 	for iToken := 0; iToken < numTokens; iToken++ {
-		for _, word := range tokens[iToken].text {
+		for _, word := range tokens[iToken].Texts {
 			output += fmt.Sprint(string(word))
 		}
 		output += " "

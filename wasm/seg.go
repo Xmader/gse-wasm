@@ -1,6 +1,9 @@
 package main
 
 import (
+	"bytes"
+	"compress/lzw"
+	"encoding/gob"
 	"syscall/js"
 
 	gse "github.com/Xmader/gse-wasm/src"
@@ -21,6 +24,28 @@ func LoadDict(this js.Value, args []js.Value) interface{} {
 
 	err := seg.LoadDict(dictStrList...)
 	return err
+}
+
+func SetDict(this js.Value, args []js.Value) interface{} {
+	uint8Array := args[0]
+	size := args[1].Int()
+
+	buf := make([]byte, size)
+	js.CopyBytesToGo(buf, uint8Array)
+
+	reader := bytes.NewReader(buf)
+
+	decompressor := lzw.NewReader(reader, lzw.MSB, 8)
+	defer decompressor.Close()
+
+	dict := gse.Dictionary{}
+
+	dec := gob.NewDecoder(decompressor)
+	dec.Decode(&dict)
+
+	seg.SetDictionary(&dict)
+
+	return nil
 }
 
 func AddToken(this js.Value, args []js.Value) interface{} {

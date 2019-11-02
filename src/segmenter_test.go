@@ -67,15 +67,15 @@ func TestSegment(t *testing.T) {
 	// tt.Expect(t, "世界/ 有/x 七十亿/ 人口/p12 ", ToString(segments, false))
 
 	tt.Expect(t, "4", len(segments))
-	tt.Expect(t, "0", segments[0].start)
-	tt.Expect(t, "6", segments[0].end)
-	tt.Expect(t, "6", segments[1].start)
-	tt.Expect(t, "9", segments[1].end)
+	tt.Expect(t, "0", segments[0].Start)
+	tt.Expect(t, "6", segments[0].End)
+	tt.Expect(t, "6", segments[1].Start)
+	tt.Expect(t, "9", segments[1].End)
 
-	tt.Expect(t, "9", segments[2].start)
-	tt.Expect(t, "18", segments[2].end)
-	tt.Expect(t, "18", segments[3].start)
-	tt.Expect(t, "24", segments[3].end)
+	tt.Expect(t, "9", segments[2].Start)
+	tt.Expect(t, "18", segments[2].End)
+	tt.Expect(t, "18", segments[3].Start)
+	tt.Expect(t, "24", segments[3].End)
 }
 
 func TestSegmentS(t *testing.T) {
@@ -84,8 +84,8 @@ func TestSegmentS(t *testing.T) {
 	// seg.LoadDict()
 
 	dict := seg.Dictionary()
-	tt.Expect(t, "16", dict.maxTokenLen)
-	tt.Expect(t, "53250728", dict.totalFrequency)
+	tt.Expect(t, "16", dict.MaxTokenLen)
+	tt.Expect(t, "53250728", dict.TotalFrequency)
 
 	tt.Expect(t, "587881", seg.dict.NumTokens())
 	text1 := []byte("纽约帝国大厦, 旧金山湾金门大桥")
@@ -107,20 +107,20 @@ func TestSegmentS(t *testing.T) {
 	tt.Expect(t, segStr, ToString(segs, false))
 
 	tt.Expect(t, "6", len(segments))
-	tt.Expect(t, "0", segments[0].start)
-	tt.Expect(t, "6", segments[0].end)
-	tt.Expect(t, "6", segments[1].start)
-	tt.Expect(t, "18", segments[1].end)
+	tt.Expect(t, "0", segments[0].Start)
+	tt.Expect(t, "6", segments[0].End)
+	tt.Expect(t, "6", segments[1].Start)
+	tt.Expect(t, "18", segments[1].End)
 
 	text2 := []byte("留给真爱你的人")
 	segments2 := seg.Segment(text2)
 	tt.Expect(t, "留给/v 真爱/nr 你/r 的/uj 人/n ", ToString(segments2, false))
 
 	tt.Expect(t, "5", len(segments2))
-	tt.Expect(t, "0", segments2[0].start)
-	tt.Expect(t, "6", segments2[0].end)
-	tt.Expect(t, "6", segments2[1].start)
-	tt.Expect(t, "12", segments2[1].end)
+	tt.Expect(t, "0", segments2[0].Start)
+	tt.Expect(t, "6", segments2[0].End)
+	tt.Expect(t, "6", segments2[1].Start)
+	tt.Expect(t, "12", segments2[1].End)
 }
 
 func TestSegmentJp(t *testing.T) {
@@ -135,8 +135,8 @@ func TestSegmentJp(t *testing.T) {
 	tt.True(t, IsJp(ToSlice(segments)[0]))
 
 	tt.Expect(t, "2", len(segments))
-	tt.Expect(t, "0", segments[0].start)
-	tt.Expect(t, "15", segments[0].end)
+	tt.Expect(t, "0", segments[0].Start)
+	tt.Expect(t, "15", segments[0].End)
 }
 
 func TestSegmentDicts(t *testing.T) {
@@ -148,36 +148,36 @@ func TestSegmentDicts(t *testing.T) {
 	tt.Expect(t, "旧金山湾/ns 金门大桥/nz ", ToString(segments, false))
 
 	tt.Expect(t, "2", len(segments))
-	tt.Expect(t, "0", segments[0].start)
-	tt.Expect(t, "12", segments[0].end)
-	tt.Expect(t, "12", segments[1].start)
-	tt.Expect(t, "24", segments[1].end)
+	tt.Expect(t, "0", segments[0].Start)
+	tt.Expect(t, "12", segments[0].End)
+	tt.Expect(t, "12", segments[1].Start)
+	tt.Expect(t, "24", segments[1].End)
 
 	segments = seg.Segment(testH)
 	tt.Expect(t, "こんにちは/感動詞 世界/n ", ToString(segments, false))
 	tt.Expect(t, "2", len(segments))
 	tt.Expect(t, "こん/名詞 こんにちは/感動詞 世界/n ", ToString(segments, true))
 	tt.Expect(t, "2", len(segments))
-	tt.Expect(t, "0", segments[0].start)
-	tt.Expect(t, "15", segments[0].end)
+	tt.Expect(t, "0", segments[0].Start)
+	tt.Expect(t, "15", segments[0].End)
 
-	tt.Expect(t, "0", segments[0].Start())
-	tt.Expect(t, "15", segments[0].End())
+	tt.Expect(t, "0", segments[0].GetStart())
+	tt.Expect(t, "15", segments[0].GetEnd())
 
-	token := segments[0].Token()
+	token := segments[0].GetToken()
 	tt.Expect(t, "こんにちは", token.Text())
-	tt.Expect(t, "5704", token.Frequency())
-	tt.Expect(t, "感動詞", token.Pos())
+	tt.Expect(t, "5704", token.Frequency)
+	tt.Expect(t, "感動詞", token.Pos)
 
 	var tokenArr []*Token
 	for i := 0; i < len(segments); i++ {
-		tokenArr = append(tokenArr, segments[i].Token())
+		tokenArr = append(tokenArr, segments[i].GetToken())
 	}
 	tt.Expect(t, "こんにちは 世界 ", printTokens(tokenArr, 2))
 
-	tseg := token.Segments()
-	tt.Expect(t, "0", tseg[0].Start())
-	tt.Expect(t, "6", tseg[0].End())
+	tseg := token.GetSegments()
+	tt.Expect(t, "0", tseg[0].GetStart())
+	tt.Expect(t, "6", tseg[0].GetEnd())
 }
 
 func TestLargeDictionary(t *testing.T) {
@@ -280,7 +280,7 @@ func TestHMM(t *testing.T) {
 }
 
 var token = Token{
-	text: []Text{
+	Texts: []Text{
 		[]byte("one"),
 		[]byte("two"),
 	},

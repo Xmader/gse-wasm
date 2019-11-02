@@ -23,40 +23,40 @@ func ToString(segs []Segment, searchMode ...bool) (output string) {
 
 	if mode {
 		for _, seg := range segs {
-			output += tokenToString(seg.token)
+			output += tokenToString(seg.Token)
 		}
 		return
 	}
 
 	for _, seg := range segs {
 		output += fmt.Sprintf("%s/%s ",
-			textSliceToString(seg.token.text), seg.token.pos)
+			textSliceToString(seg.Token.Texts), seg.Token.Pos)
 	}
 	return
 }
 
 func tokenToString(token *Token) (output string) {
 	hasOnlyTerminalToken := true
-	for _, s := range token.segments {
-		if len(s.token.segments) > 1 || IsJp(string(s.token.text[0])) {
+	for _, s := range token.Segments {
+		if len(s.Token.Segments) > 1 || IsJp(string(s.Token.Texts[0])) {
 			hasOnlyTerminalToken = false
 		}
 
 		if !hasOnlyTerminalToken && s != nil {
-			output += tokenToString(s.token)
+			output += tokenToString(s.Token)
 		}
 	}
 
-	output += fmt.Sprintf("%s/%s ", textSliceToString(token.text), token.pos)
+	output += fmt.Sprintf("%s/%s ", textSliceToString(token.Texts), token.Pos)
 	return
 }
 
 func tokenToBytes(token *Token) (output []byte) {
-	for _, s := range token.segments {
-		output = append(output, tokenToBytes(s.token)...)
+	for _, s := range token.Segments {
+		output = append(output, tokenToBytes(s.Token)...)
 	}
 	output = append(output, []byte(fmt.Sprintf("%s/%s ",
-		textSliceToString(token.text), token.pos))...)
+		textSliceToString(token.Texts), token.Pos))...)
 
 	return
 }
@@ -79,30 +79,30 @@ func ToSlice(segs []Segment, searchMode ...bool) (output []string) {
 
 	if mode {
 		for _, seg := range segs {
-			output = append(output, tokenToSlice(seg.token)...)
+			output = append(output, tokenToSlice(seg.Token)...)
 		}
 		return
 	}
 
 	for _, seg := range segs {
-		output = append(output, seg.token.Text())
+		output = append(output, seg.Token.Text())
 	}
 	return
 }
 
 func tokenToSlice(token *Token) (output []string) {
 	hasOnlyTerminalToken := true
-	for _, s := range token.segments {
-		if len(s.token.segments) > 1 || IsJp(string(s.token.text[0])) {
+	for _, s := range token.Segments {
+		if len(s.Token.Segments) > 1 || IsJp(string(s.Token.Texts[0])) {
 			hasOnlyTerminalToken = false
 		}
 
 		if !hasOnlyTerminalToken {
-			output = append(output, tokenToSlice(s.token)...)
+			output = append(output, tokenToSlice(s.Token)...)
 		}
 	}
 
-	output = append(output, textSliceToString(token.text))
+	output = append(output, textSliceToString(token.Texts))
 	return
 }
 

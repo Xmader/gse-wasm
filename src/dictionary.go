@@ -20,46 +20,41 @@ import "github.com/Xmader/gse-wasm/src/cedar"
 // Dictionary 结构体实现了一个字串前缀树，
 // 一个分词可能出现在叶子节点也有可能出现在非叶节点
 type Dictionary struct {
-	trie           *cedar.Cedar // Cedar 前缀树
-	maxTokenLen    int          // 词典中最长的分词
-	tokens         []Token      // 词典中所有的分词，方便遍历
-	totalFrequency int64        // 词典中所有分词的频率之和
+	Trie           *cedar.Cedar // Cedar 前缀树
+	MaxTokenLen    int          // 词典中最长的分词
+	Tokens         []Token      // 词典中所有的分词，方便遍历
+	TotalFrequency int64        // 词典中所有分词的频率之和
 }
 
 // NewDict new dictionary
 func NewDict() *Dictionary {
-	return &Dictionary{trie: cedar.New()}
-}
-
-// MaxTokenLen 词典中最长的分词
-func (dict *Dictionary) MaxTokenLen() int {
-	return dict.maxTokenLen
+	return &Dictionary{Trie: cedar.New()}
 }
 
 // NumTokens 词典中分词数目
 func (dict *Dictionary) NumTokens() int {
-	return len(dict.tokens)
+	return len(dict.Tokens)
 }
 
 // TotalFreq 词典中所有分词的频率之和
 func (dict *Dictionary) TotalFreq() int64 {
-	return dict.totalFrequency
+	return dict.TotalFrequency
 }
 
 // addToken 向词典中加入一个分词
 func (dict *Dictionary) addToken(token Token) {
-	bytes := textSliceToBytes(token.text)
-	_, err := dict.trie.Get(bytes)
+	bytes := textSliceToBytes(token.Texts)
+	_, err := dict.Trie.Get(bytes)
 	if err == nil {
 		return
 	}
 
-	dict.trie.Insert(bytes, dict.NumTokens())
-	dict.tokens = append(dict.tokens, token)
-	dict.totalFrequency += int64(token.frequency)
+	dict.Trie.Insert(bytes, dict.NumTokens())
+	dict.Tokens = append(dict.Tokens, token)
+	dict.TotalFrequency += int64(token.Frequency)
 
-	if len(token.text) > dict.maxTokenLen {
-		dict.maxTokenLen = len(token.text)
+	if len(token.Texts) > dict.MaxTokenLen {
+		dict.MaxTokenLen = len(token.Texts)
 	}
 }
 
@@ -73,14 +68,14 @@ func (dict *Dictionary) lookupTokens(
 	)
 
 	for _, word := range words {
-		id, err = dict.trie.Jump(word, id)
+		id, err = dict.Trie.Jump(word, id)
 		if err != nil {
 			break
 		}
 
-		value, err = dict.trie.Value(id)
+		value, err = dict.Trie.Value(id)
 		if err == nil {
-			tokens[numOfTokens] = &dict.tokens[value]
+			tokens[numOfTokens] = &dict.Tokens[value]
 			numOfTokens++
 		}
 	}
@@ -96,12 +91,12 @@ func (dict *Dictionary) Find(word []byte) (int, bool) {
 		err             error
 	)
 
-	id, err = dict.trie.Jump(word, id)
+	id, err = dict.Trie.Jump(word, id)
 	if err != nil {
 		return 0, false
 	}
 
-	value, err = dict.trie.Value(id)
+	value, err = dict.Trie.Value(id)
 	if err != nil && id != 0 {
 		return 0, true
 	}
@@ -110,7 +105,7 @@ func (dict *Dictionary) Find(word []byte) (int, bool) {
 		return 0, false
 	}
 
-	freq = dict.tokens[value].frequency
+	freq = dict.Tokens[value].Frequency
 
 	return freq, true
 }
