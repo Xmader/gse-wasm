@@ -40,9 +40,13 @@
     } else {
         const dictDataURL = `https://raw.githubusercontent.com/Xmader/gse-wasm/master/dist/${dictDataFile}`
         const dictDataURLr = await fetch(dictDataURL)
-        const dictData = new Uint8Array(await dictDataURLr.arrayBuffer())
-        store.setItem(dictDataFile, dictData)
-        seg.SetDict(dictData, dictData.length)
+        if (dictDataURLr.ok) {
+            const dictData = new Uint8Array(await dictDataURLr.arrayBuffer())
+            store.setItem(dictDataFile, dictData)
+            seg.SetDict(dictData, dictData.length)
+        } else {
+            throw new Error(`${dictDataURLr.status} ${dictDataURLr.statusText}`)
+        }
     }
 
     runBtn.disabled = false
