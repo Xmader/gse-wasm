@@ -3,12 +3,13 @@
 (async () => {
 
     const jp = /^\?jp$/.test(location.search)
+    const lang = jp ? "jp" : "zh"
 
     /** @type {HTMLButtonElement} */
     const runBtn = document.querySelector("#runButton")
     runBtn.disabled = true
 
-    const wasmURL = `https://cdn.staticaly.com/gh/Xmader/gse-wasm/master/dist/gse${jp ? "_full" : ""}.wasm`
+    const wasmURL = "https://cdn.staticaly.com/gh/Xmader/gse-wasm/master/dist/gse_lite.wasm"
     const wasm = await Init(wasmURL)
 
     /** @type {import("..").Gse} */
@@ -27,7 +28,22 @@
 
     runBtn.onclick = run
 
-    seg.LoadDict(jp ? "jp" : "zh")
+    /** @type {import("localforage")} */
+    const store = localforage.createInstance({
+        name: "gse-wasm"
+    })
+    const dictDataFile = `dict_data_${lang}.bin`
+
+    const savedData = await store.getItem(dictDataFile)
+    if (savedData) {
+        seg.SetDict(savedData, savedData.length)
+    } else {
+        const dictDataURL = `https://cdn.staticaly.com/gh/Xmader/gse-wasm/master/dist/${dictDataFile}`
+        const dictDataURLr = await fetch(dictDataURL)
+        const dictData = new Uint8Array(await dictDataURLr.arrayBuffer())
+        store.setItem(dictDataFile, dictData)
+        seg.SetDict(dictData, dictData.length)
+    }
 
     runBtn.disabled = false
 

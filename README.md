@@ -34,7 +34,7 @@ npm install gse-wasm
 
 ## Build 
 
-(Go 1.12 or above should be installed)
+(Go 1.13 or above should be installed)
 
 ```
 npm run build:all

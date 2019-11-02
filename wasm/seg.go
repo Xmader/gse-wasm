@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"compress/lzw"
 	"encoding/gob"
 	"syscall/js"
 
@@ -26,16 +27,23 @@ func LoadDict(this js.Value, args []js.Value) interface{} {
 }
 
 func SetDict(this js.Value, args []js.Value) interface{} {
+	uint8Array := args[0]
+	size := args[1].Int()
 
-	b := []byte(args[0].String())
-	reader := bytes.NewReader(b)
+	buf := make([]byte, size)
+	js.CopyBytesToGo(buf, uint8Array)
 
-	dict := &gse.Dictionary{}
+	reader := bytes.NewReader(buf)
 
-	dec := gob.NewDecoder(reader)
-	dec.Decode(dict)
+	decompressor := lzw.NewReader(reader, lzw.MSB, 8)
+	defer decompressor.Close()
 
-	seg.SetDictionary(dict)
+	dict := gse.Dictionary{}
+
+	dec := gob.NewDecoder(decompressor)
+	dec.Decode(&dict)
+
+	seg.SetDictionary(&dict)
 
 	return nil
 }
