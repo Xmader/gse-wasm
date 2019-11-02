@@ -38,7 +38,7 @@
     if (savedData) {
         seg.SetDict(savedData, savedData.length)
     } else {
-        const dictDataURL = `https://cdn.staticaly.com/gh/Xmader/gse-wasm/master/dist/${dictDataFile}`
+        const dictDataURL = `https://raw.githubusercontent.com/Xmader/gse-wasm/master/dist/${dictDataFile}`
         const dictDataURLr = await fetch(dictDataURL)
         const dictData = new Uint8Array(await dictDataURLr.arrayBuffer())
         store.setItem(dictDataFile, dictData)
